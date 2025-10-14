@@ -15,7 +15,7 @@ namespace HospitalApp.models
         byte Age,
         string Document,
         string Specialty)
-        : base(Id, FirstName, LastName, Age, Document)
+        : base( FirstName, LastName, Age, Document)
         {
           this.Specialty = Specialty;  
         }

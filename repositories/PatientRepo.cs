@@ -10,7 +10,6 @@ namespace HospitalApp.repositories
 {
         private static PatientRepo? _instance;
         private List<Patient> Patients { get; set; }
-
         private PatientRepo()
         {
             Patients = [];
@@ -33,7 +32,7 @@ namespace HospitalApp.repositories
             Patients.Add(patient);
         }
 
-        public bool DeletePatient(string Document)
+        public bool DeletePatient(string? Document)
         {
             var toDelete = Patients.FirstOrDefault(patient => patient.Document == Document);
             if (toDelete != null)

@@ -9,7 +9,7 @@ namespace HospitalApp.repositories
     public class DoctorRepo
     {
         private static DoctorRepo? _instance;
-        private readonly List<Doctor> Doctors = [];
+        private List<Doctor> Doctors {get; set;}
         private DoctorRepo()
         {
             Doctors = [];
@@ -27,7 +27,7 @@ namespace HospitalApp.repositories
         {
             Doctors.Add(doctor);
         }
-        private bool RemoveDoctor(string Document)
+        private bool RemoveDoctor(string? Document)
         {
             var toRemove = Doctors.FirstOrDefault(doctor => doctor.Document == Document);
             if (toRemove != null)
@@ -35,10 +35,7 @@ namespace HospitalApp.repositories
                 Doctors.Remove(toRemove);
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
     }
 }

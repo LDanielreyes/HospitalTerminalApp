@@ -31,5 +31,15 @@ namespace HospitalApp.repositories
         {
             Appointments.Add(appointment);
         }
+        public bool RemoveAppointment(string? Id)
+        {
+            var toRemove = Appointments.FirstOrDefault(appointment => appointment.Id == Id);
+            if (toRemove != null)
+            {
+                Appointments.Remove(toRemove);
+                return true;
+            }
+            return false;
+        }
     }
 }

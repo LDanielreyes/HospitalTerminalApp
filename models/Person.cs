@@ -14,7 +14,7 @@ namespace HospitalApp.models
         public byte Age { get; set; }
         public string? Document { get; set; }
 
-        public Person(string Id, string FirstName, string LastName, byte Age, string Document)
+        public Person( string FirstName, string LastName, byte Age, string Document)
         {
             Id = $"USER00{nextId++}";
             this.FirstName = FirstName;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HospitalApp.ui.responses;
 
 namespace HospitalApp.ui.menus
 {
@@ -37,6 +38,8 @@ namespace HospitalApp.ui.menus
                         break;
                     case "4":
                         System.Console.WriteLine("Log out");
+                        Messages.Continue();
+                        MainMenu.ShowMainMenu();
                         break;
                     default:
                         System.Console.WriteLine("Invalid option");
