@@ -7,6 +7,9 @@ namespace HospitalApp.ui.menus
 {
     public class PatientMenu
     {
-        
+        public static void ShowPatientMenu()
+        {
+
+        }
     }
 }

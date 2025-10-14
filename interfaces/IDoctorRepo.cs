@@ -6,7 +6,7 @@ using HospitalApp.models;
 
 namespace HospitalApp.interfaces
 {
-    public interface IDoctorRepo : IPersonRepo<Doctor>
+    public interface IDoctorRepo
     {
         void CreateAppointment(Appointment appointment);
         void UpdateAppointment(string appointmentId, string newState);

@@ -6,7 +6,7 @@ using HospitalApp.models;
 
 namespace HospitalApp.interfaces
 {
-public interface IPatientRepo : IPersonRepo<Patient>
+public interface IPatientRepo 
 {
     void UpdateContactInfo(string document, string newAddress, string newTel);
 }
