@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HospitalApp.services;
 using HospitalApp.ui.responses;
 
 namespace HospitalApp.ui.menus
@@ -16,7 +17,7 @@ namespace HospitalApp.ui.menus
             {
                 System.Console.WriteLine(@"
 .________________________________.
-|////////| Patient Menu |\\\\\\\\|
+|/////////| User Menu |\\\\\\\\\\|
 |================================|
 |1. Update my info               |
 |2. create Appointment		     |
@@ -28,13 +29,13 @@ namespace HospitalApp.ui.menus
                 switch (option)
                 {
                     case "1":
-                        System.Console.WriteLine("Update my info");
+                        CurrentUserServices.UpdateCurrentUser();
                         break;
                     case "2":
-                        System.Console.WriteLine("create Appointment");
+                        AppointmentServices.CreateAppointment();
                         break;
                     case "3":
-                        System.Console.WriteLine("show my Appointments");
+                        CurrentUserServices.ViewMyAppointments();
                         break;
                     case "4":
                         System.Console.WriteLine("Log out");

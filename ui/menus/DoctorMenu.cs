@@ -16,21 +16,16 @@ namespace HospitalApp.ui.menus
 .________________________________.
 |////////| Doctor  Menu |\\\\\\\\|
 |================================|
-|1. Add Doctor                   |
-|2. Show Doctors                 |
-|3. Search Doctor                |
-|4. Delete Doctor                |
-|5. Take Appointment             |
-|6. create Appointment		     |
-|7. show my Appointments         |
-|8. Log out                      |
+|1. Take Appointment             |
+|2. create Appointment		     |
+|3. show my Appointments         |
+|4. Log out                      |
 .--------------------------------.
             ");
                 option = Console.ReadLine();
                 switch (option)
                 {
                     case "1":
-                        System.Console.WriteLine("Add Doctor");
                         break;
                     case "2":
                         System.Console.WriteLine("Show Doctors");
@@ -41,24 +36,12 @@ namespace HospitalApp.ui.menus
                     case "4":
                         System.Console.WriteLine("Delete Doctor");
                         break;
-                    case "5":
-                        System.Console.WriteLine("Take Appointment");
-                        break;
-                    case "6":
-                        System.Console.WriteLine("create Appointment");
-                        break;
-                    case "7":
-                        System.Console.WriteLine("show my Appointments");
-                        break;
-                    case "8":
-                        System.Console.WriteLine("Log out");
-                        break;
                     default:
                         System.Console.WriteLine("Invalid option");
                         break;
                 }
 
-            } while (option != "8");
+            } while (option != "4");
         }
     }
 }

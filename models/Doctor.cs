@@ -8,8 +8,6 @@ namespace HospitalApp.models
     {
         public string? Specialty { get; set; }
         public Doctor(
-
-        string Id,
         string FirstName,
         string LastName,
         byte Age,

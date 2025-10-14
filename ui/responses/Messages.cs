@@ -9,7 +9,6 @@ namespace HospitalApp.ui.responses
    public class Messages
     {
         private static readonly PatientRepo patientRepo = PatientRepo.Instance;
-        private static readonly DoctorRepo doctorRepo = DoctorRepo.Instance;
         private static readonly AppointmentRepo appointmentRepo = AppointmentRepo.Instance;
 
         public static void UserNotFound()

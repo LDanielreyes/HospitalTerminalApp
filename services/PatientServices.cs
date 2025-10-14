@@ -111,13 +111,10 @@ namespace HospitalApp.services
             }
         }
 
-        public static bool UpdatePatientInfo()
+        public static bool UpdatePatientInfo(string patientId)
         {
             try
             {
-                System.Console.Write("Write the Id of the patient: USER00");
-                string? Id = Console.ReadLine();
-                string? patientId = $"USER00{Id}";
 
                 var patient = repo.GetPatients().FirstOrDefault(p => p.Id == patientId);
                 if (patient == null)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HospitalApp.services;
 
 namespace HospitalApp.ui.menus
 {
@@ -25,10 +26,10 @@ namespace HospitalApp.ui.menus
                 switch (option)
                 {
                     case "1":
-                        System.Console.WriteLine("Log in");
+                        CurrentUserServices.Login();
                         break;
                     case "2":
-                        System.Console.WriteLine("Register");
+                        PatientServices.AddPatientToList();
                         break;
                     case "3":
                         System.Console.WriteLine("Exit");

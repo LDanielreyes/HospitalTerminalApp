@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HospitalApp.services;
 
 namespace HospitalApp.ui.menus
 {
@@ -29,16 +30,16 @@ namespace HospitalApp.ui.menus
                 switch (option)
                 {
                     case "1":
-                        System.Console.WriteLine("Add Doctor");
+                        DoctorServices.AddDoctorToList();
                         break;
                     case "2":
-                        System.Console.WriteLine("Show Doctors");
+                        DoctorServices.ShowAllDoctors();
                         break;
                     case "3":
-                        System.Console.WriteLine("Search Doctor");
+                        DoctorServices.ShowDoctor();
                         break;
                     case "4":
-                        System.Console.WriteLine("Delete Doctor");
+                        DoctorServices.DeleteDoctorTerminal();
                         break;
                     case "5":
                         System.Console.WriteLine("create Appointment");
