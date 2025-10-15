@@ -1,18 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using HospitalApp.models;
+using HospitalApp.repositories.interfaces;
 
 namespace HospitalApp.repositories
 {
-    public class PatientRepo
-{
+    public class PatientRepo : IPatientRepo
+    {
         private static PatientRepo? _instance;
         private List<Patient> Patients { get; set; }
+
         private PatientRepo()
         {
-            Patients = [];
+            Patients = new List<Patient>();
         }
 
         public static PatientRepo Instance
@@ -20,7 +21,6 @@ namespace HospitalApp.repositories
             get
             {
                 _instance ??= new PatientRepo();
-
                 return _instance;
             }
         }
@@ -29,19 +29,30 @@ namespace HospitalApp.repositories
 
         public void AddPatient(Patient patient)
         {
+            if (patient == null) throw new ArgumentNullException(nameof(patient));
             Patients.Add(patient);
         }
 
-        public bool DeletePatient(string? Document)
+        public Patient? GetPatientByDocument(string document)
         {
-            var toDelete = Patients.FirstOrDefault(patient => patient.Document == Document);
-            if (toDelete != null)
-            {
-                Patients.Remove(toDelete);
-                return true;
-            }
-            return false;
+            return Patients.FirstOrDefault(p => p.Document == document);
         }
 
+        public void UpdatePatient(Patient patient)
+        {
+            var existing = GetPatientByDocument(patient.Document);
+            if (existing != null)
+            {
+                var index = Patients.IndexOf(existing);
+                Patients[index] = patient;
+            }
+        }
+
+        public void DeletePatient(string document)
+        {
+            var toDelete = GetPatientByDocument(document);
+            if (toDelete != null)
+                Patients.Remove(toDelete);
+        }
     }
 }

@@ -23,7 +23,9 @@ namespace HospitalApp.ui.menus
 |4. Delete Doctor                |
 |5. create Appointment		     |
 |6. show Appointments            |
-|7. Log out                      |
+|7. delete patient               |
+|8. update patient               |
+|9. Log out                      |
 .--------------------------------.
 ");
                 option = Console.ReadLine();
@@ -42,19 +44,30 @@ namespace HospitalApp.ui.menus
                         DoctorServices.DeleteDoctorTerminal();
                         break;
                     case "5":
-                        System.Console.WriteLine("create Appointment");
+                        AppointmentServices.CreateAppointment();
                         break;
                     case "6":
-                        System.Console.WriteLine("show Appointments");
+                        AppointmentServices.ShowAllAppointments();
                         break;
                     case "7":
-                        System.Console.WriteLine("Log out"); 
+                        PatientServices.DeletePatientTerminal();
+                        break;
+                    case "8":
+                        Console.Clear();
+                        System.Console.Write("Write the Id of the patient: USER00");
+                        string? Id = Console.ReadLine();
+                        string? patientId = $"USER00{Id}";
+                        PatientServices.UpdatePatientInfo(patientId);
+                        break;
+                    case "9":
+                        System.Console.WriteLine("Log out");
+                        MainMenu.ShowMainMenu();
                         break;
                     default:
                         System.Console.WriteLine("Invalid option");
                         break;
                 }
-            }while (option != "7");
+            }while (option != "9");
     }
     }
 } 

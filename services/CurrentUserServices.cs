@@ -10,6 +10,7 @@ namespace HospitalApp.services
     public class CurrentUserServices
     {
         private static readonly PatientRepo repo = PatientRepo.Instance;
+        private static readonly DoctorRepo doctorRepo = DoctorRepo.Instance;
         private static Patient? currentUser;
 
         public static void Login()
@@ -21,6 +22,13 @@ namespace HospitalApp.services
                 Console.Write("Citizenship Card: ");
                 string? document = Console.ReadLine();
 
+                if (string.IsNullOrWhiteSpace(document))
+                {
+                    Messages.UserNotFound();
+                    return;
+                }
+
+                // Admin hardcoded (como ya tenías)
                 if (document == "987654321")
                 {
                     AdminMenu.ShowAdminMenu();
@@ -30,6 +38,15 @@ namespace HospitalApp.services
                 Console.Write("Password: ");
                 string? password = Console.ReadLine();
 
+                // 1) Buscar si es doctor por documento
+                var foundDoctor = doctorRepo.GetDoctors().FirstOrDefault(d => d.Document == document);
+                if (foundDoctor != null)
+                {
+                    DoctorMenu.ShowDoctorMenu(foundDoctor.Document!);
+                    return;
+                }
+
+                // 2) Si no es doctor, buscar paciente
                 var foundUser = repo.GetPatients().FirstOrDefault(patient =>
                     patient.Document == document && patient.Password == password);
 
@@ -76,7 +93,7 @@ namespace HospitalApp.services
                 var appointmentRepo = AppointmentRepo.Instance;
                 var myAppointments = appointmentRepo
                     .GetAppointments()
-                    .Where(a => a.DocumentPatient == currentUser.Document)
+                    .Where(appointment => appointment.DocumentPatient == currentUser.Document)
                     .ToList();
 
                 if (!myAppointments.Any())
@@ -90,16 +107,16 @@ namespace HospitalApp.services
                 Console.WriteLine($"\n=== APPOINTMENTS FOR {currentUser.FirstName} {currentUser.LastName} ===\n");
                 Console.ResetColor();
 
-                foreach (var a in myAppointments)
+                foreach (var appointment in myAppointments)
                 {
                     Console.WriteLine($@"
 ----------------------------------------
-ID: {a.Id}
-Doctor: {a.NameDoctor} ({a.Specialty})
-Date: {a.Date}
-State: {a.State}
-Diagnosis: {a.Diagnosis}
-Symptoms: {a.Symptoms}
+ID: {appointment.Id}
+Doctor: {appointment.NameDoctor} ({appointment.Specialty})
+Date: {appointment.Date}
+State: {appointment.State}
+Diagnosis: {appointment.Diagnosis}
+Symptoms: {appointment.Symptoms}
 ----------------------------------------");
                 }
             }

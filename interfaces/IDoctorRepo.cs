@@ -1,14 +1,14 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using HospitalApp.models;
 
-namespace HospitalApp.interfaces
+namespace HospitalApp.repositories.interfaces
 {
     public interface IDoctorRepo
     {
-        void CreateAppointment(Appointment appointment);
-        void UpdateAppointment(string appointmentId, string newState);
+        void AddDoctor(Doctor doctor);
+        List<Doctor> GetDoctors();
+        Doctor? GetDoctorByDocument(string document);
+        void UpdateDoctor(Doctor doctor);
+        void DeleteDoctor(string document);
     }
 }

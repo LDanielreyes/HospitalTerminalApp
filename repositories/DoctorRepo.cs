@@ -1,20 +1,29 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using HospitalApp.models;
+using HospitalApp.repositories.interfaces;
 
 namespace HospitalApp.repositories
 {
-    public class DoctorRepo
+    public class DoctorRepo : IDoctorRepo
     {
         private static DoctorRepo? _instance;
-        private List<Doctor> Doctors {get; set;}
+        private List<Doctor> Doctors { get; set; }
+
         private DoctorRepo()
         {
-            Doctors = [];
+            Doctors = new List<Doctor>
+            {
+                new Doctor("Juan", "Pérez", 45, "100100100", "Cardiology"),
+                new Doctor("María", "Gómez", 38, "200200200", "Pediatrics"),
+                new Doctor("Carlos", "Ramírez", 50, "300300300", "General Surgery"),
+                new Doctor("Laura", "Santos", 33, "400400400", "Dermatology"),
+                new Doctor("Andrés", "Lozano", 41, "500500500", "Neurology")
+            };
         }
-        public static DoctorRepo? Instance
+
+        public static DoctorRepo Instance
         {
             get
             {
@@ -22,20 +31,35 @@ namespace HospitalApp.repositories
                 return _instance;
             }
         }
+
         public List<Doctor> GetDoctors() => Doctors;
+
         public void AddDoctor(Doctor doctor)
         {
+            if (doctor == null) throw new ArgumentNullException(nameof(doctor));
             Doctors.Add(doctor);
         }
-        private bool RemoveDoctor(string? Document)
+
+        public Doctor? GetDoctorByDocument(string document)
         {
-            var toRemove = Doctors.FirstOrDefault(doctor => doctor.Document == Document);
-            if (toRemove != null)
+            return Doctors.FirstOrDefault(d => d.Document == document);
+        }
+
+        public void UpdateDoctor(Doctor doctor)
+        {
+            var existing = GetDoctorByDocument(doctor.Document);
+            if (existing != null)
             {
-                Doctors.Remove(toRemove);
-                return true;
+                var index = Doctors.IndexOf(existing);
+                Doctors[index] = doctor;
             }
-            return false;
+        }
+
+        public void DeleteDoctor(string document)
+        {
+            var toDelete = GetDoctorByDocument(document);
+            if (toDelete != null)
+                Doctors.Remove(toDelete);
         }
     }
 }

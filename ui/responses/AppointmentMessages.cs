@@ -14,7 +14,7 @@ namespace HospitalApp.ui.responses
         public static void AppointmentNotFound()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Appointment not found.");
+            Console.WriteLine("\nAppointment not found. Please enter a valid ID.");
             Console.ResetColor();
         }
 
@@ -62,15 +62,29 @@ namespace HospitalApp.ui.responses
 
         public static void NoAppointments()
         {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("No appointments registered.");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nNo appointments found for this patient.");
+            Console.ResetColor();
+        }
+
+        public static void NoPendingAppointments()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\nThere are no pending appointments at the moment.");
+            Console.ResetColor();
+        }
+
+        public static void AppointmentAssigned(string id, string doctorName)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"\nAppointment {id} has been successfully assigned to Dr. {doctorName}.");
             Console.ResetColor();
         }
 
         public static void GeneralError(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Unexpected error: {message}");
+            Console.WriteLine($"\nError: {message}");
             Console.ResetColor();
         }
     }

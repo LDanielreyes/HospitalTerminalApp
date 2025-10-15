@@ -186,27 +186,31 @@ namespace HospitalApp.services
             try
             {
                 Console.Clear();
-                System.Console.Write("Write the Id of the patient: USER00");
-                string? Id = Console.ReadLine();
-                string? patientId = $"USER00{Id}";
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("=== DELETE PATIENT ===");
+                Console.ResetColor();
 
-                var patient = repo.GetPatients().FirstOrDefault(p => p.Id == patientId);
+                Console.Write("Enter the patient's Document: ");
+                string? document = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(document))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid input. Document cannot be empty.");
+                    Console.ResetColor();
+                    return false;
+                }
+
+                var patient = repo.GetPatients().FirstOrDefault(p => p.Document == document);
                 if (patient == null)
                 {
                     Messages.UserNotFound();
                     return false;
                 }
 
-                if (repo.DeletePatient(patientId))
-                {
-                    Messages.SuccessfullyOperation();
-                    return true;
-                }
-                else
-                {
-                    Messages.UserNotFound();
-                    return false;
-                }
+                repo.DeletePatient(document);
+                Messages.SuccessfullyOperation();
+                return true;
             }
             catch (Exception ex)
             {
@@ -216,6 +220,7 @@ namespace HospitalApp.services
                 return false;
             }
         }
+
         public static bool ShowPatients()
         {
             try

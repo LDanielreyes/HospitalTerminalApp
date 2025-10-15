@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HospitalApp.models;
+using HospitalApp.repositories.interfaces;
 
 namespace HospitalApp.repositories
 {
-    public class AppointmentRepo
+    public class AppointmentRepo : IAppointmentRepo
     {
         private static AppointmentRepo? _instance;
         private List<Appointment> Appointments { get; set; }

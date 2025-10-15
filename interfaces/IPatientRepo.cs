@@ -1,14 +1,14 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using HospitalApp.models;
 
-namespace HospitalApp.interfaces
+namespace HospitalApp.repositories.interfaces
 {
-public interface IPatientRepo 
-{
-    void UpdateContactInfo(string document, string newAddress, string newTel);
-}
-
+    public interface IPatientRepo
+    {
+        void AddPatient(Patient patient);
+        List<Patient> GetPatients();
+        Patient? GetPatientByDocument(string document);
+        void UpdatePatient(Patient patient);
+        void DeletePatient(string document);
+    }
 }

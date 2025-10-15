@@ -1,11 +1,12 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using HospitalApp.models;
 
-namespace HospitalApp.interfaces
+namespace HospitalApp.repositories.interfaces
 {
-    public class IAppointmentRepo
+    public interface IAppointmentRepo
     {
+        List<Appointment> GetAppointments();
+        void AddAppointment(Appointment appointment);
+        bool RemoveAppointment(string? id);
     }
 }

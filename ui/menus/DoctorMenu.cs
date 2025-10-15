@@ -1,44 +1,65 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using HospitalApp.services;
 
 namespace HospitalApp.ui.menus
 {
     public class DoctorMenu
     {
-        public static void ShowDoctorMenu()
+        public static void ShowDoctorMenu(string doctorDocument)
         {
             string? option;
+
             do
             {
-                System.Console.WriteLine(@"
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(@"
 .________________________________.
-|////////| Doctor  Menu |\\\\\\\\|
+|////////| Doctor Menu |\\\\\\\\\|
 |================================|
-|1. Take Appointment             |
-|2. create Appointment		     |
-|3. show my Appointments         |
-|4. Log out                      |
+| 1. Take Appointment            |
+| 2. Create Appointment          |
+| 3. Show All Appointments       |
+| 4. Log out                     |
 .--------------------------------.
-            ");
+");
+                Console.ResetColor();
+                Console.Write("Select an option: ");
                 option = Console.ReadLine();
+
+                Console.Clear();
+
                 switch (option)
                 {
                     case "1":
+                        AppointmentServices.TakeAppointment(doctorDocument);
                         break;
+
                     case "2":
-                        System.Console.WriteLine("Show Doctors");
+                        AppointmentServices.CreateAppointment();
                         break;
+
                     case "3":
-                        System.Console.WriteLine("Search Doctor");
+                        AppointmentServices.ShowAllAppointments();
                         break;
+
                     case "4":
-                        System.Console.WriteLine("Delete Doctor");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Logging out...");
+                        Console.ResetColor();
                         break;
+
                     default:
-                        System.Console.WriteLine("Invalid option");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid option. Please try again.");
+                        Console.ResetColor();
                         break;
+                }
+
+                if (option != "4")
+                {
+                    Console.WriteLine("\nPress any key to return to the menu...");
+                    Console.ReadKey();
                 }
 
             } while (option != "4");
